@@ -1,0 +1,1 @@
+const inputBox = document.querySelector(".inputField input");

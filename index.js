@@ -27,3 +27,27 @@ addBtn.addEventListener("click", () => {
     showTasks();
     addBtn.classList.remove("active");
 })
+
+function showTasks() {
+    let getLocalStorageData = localStorage.getItem("New Todo");
+    if (getLocalStorageData === null) {
+        listArray = [];
+    } else {
+        listArray = JSON.parse(getLocalStorageData);
+    }
+    const pendingTasksNumb = document.querySelector(".pendingTasks");
+    pendingTasksNumb.textContent = listArray.length;
+
+    if (listArray.length > 0) {
+        deleteAllbtn.classList.add("active");
+    } else {
+        deleteAllbtn.classList.remove("active");
+    }
+
+    let newLiTag = "";
+    listArray.forEach((element, index) => {
+        newLiTag += `<li>${element}<span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+    });
+    todoList.innerHTML = newLiTag;
+    inputBox.value = "";
+}
